@@ -24,7 +24,6 @@ const Index = () => {
   return (
     <div class="atp-app atp-file-workspace">
       <ExplorerHeader />
-      <ExplorerHeading />
       <Toolbar />
       <div class="atp-file-body">
         <aside class="atp-file-side">
@@ -32,6 +31,7 @@ const Index = () => {
           <ExplorerTree />
         </aside>
         <main class="atp-file-main">
+          <ExplorerHeading />
           <Body />
         </main>
       </div>

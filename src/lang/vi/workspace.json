@@ -144,5 +144,14 @@
     "proxy_webdav": "Proxy & WebDAV",
     "sort_index_sign": "Sắp xếp, chỉ mục & chữ ký"
   },
-  "scope": "Phạm vi"
+  "scope": "Phạm vi",
+  "more_actions": "Thao tác",
+  "item_count": "{{count}} mục",
+  "shared_link_count": "{{count}} liên kết chia sẻ",
+  "link_active": "Đang hoạt động",
+  "link_expired": "Hết hạn",
+  "link_revoked": "Đã thu hồi",
+  "password_protected": "Có mật khẩu",
+  "open_shared_link": "Mở liên kết chia sẻ",
+  "shared_files": "Tệp được chia sẻ"
 }

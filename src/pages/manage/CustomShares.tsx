@@ -1,12 +1,16 @@
 import { createSignal, For, onMount, Show } from "solid-js"
 import { Link } from "@solidjs/router"
 import { Button, Input } from "@hope-ui/solid"
+import { Paginator } from "~/components"
+import { FiFileText, FiExternalLink } from "solid-icons/fi"
 import { useT } from "~/hooks"
 import { joinBase, notify } from "~/utils"
 import { DeletePopover } from "./common/DeletePopover"
 
 interface Share {
   id: number
+  file_name?: string
+  has_password?: boolean
   file_path: string
   share_id: string
   share_url?: string
@@ -21,7 +25,20 @@ export default function CustomShares() {
     [shares, setShares] = createSignal<Share[]>([]),
     [loading, setLoading] = createSignal(true),
     [error, setError] = createSignal(""),
-    [filter, setFilter] = createSignal("")
+    [filter, setFilter] = createSignal(""),
+    [page, setPage] = createSignal(1)
+  let resetPage = () => {}
+  const state = (share: Share) =>
+    String(share.is_active) === "0"
+      ? "revoked"
+      : share.expires_at && new Date(share.expires_at).getTime() < Date.now()
+        ? "expired"
+        : "active"
+  const urlFor = (share: Share) =>
+    new URL(
+      joinBase("/s/" + encodeURIComponent(share.share_id)),
+      location.origin,
+    ).href
   const call = async (action: string, body?: object) => {
     const response = await fetch(
       joinBase("/share-app/api.php") + "?action=" + action,
@@ -89,12 +106,19 @@ export default function CustomShares() {
           aria-label={t("workspace.search_shares")}
           placeholder={t("workspace.search_shares")}
           value={filter()}
-          onInput={(e) => setFilter(e.currentTarget.value)}
+          onInput={(e) => {
+            setFilter(e.currentTarget.value)
+            setPage(1)
+            resetPage()
+          }}
         />
         <Button onClick={load} loading={loading()}>
           {t("global.refresh")}
         </Button>
       </div>
+      <p class="atp-share-total">
+        {t("workspace.shared_link_count", { count: String(filtered().length) })}
+      </p>
       <Show when={error()}>
         <p class="atp-alert" data-error="true" role="alert">
           {error()}
@@ -113,19 +137,39 @@ export default function CustomShares() {
               <thead>
                 <tr>
                   <For
-                    each={["file", "expiry", "downloads", "note", "actions"]}
+                    each={["file", "status", "expiry", "downloads", "actions"]}
                   >
                     {(key) => <th scope="col">{t("workspace." + key)}</th>}
                   </For>
                 </tr>
               </thead>
               <tbody>
-                <For each={filtered()}>
+                <For each={filtered().slice((page() - 1) * 20, page() * 20)}>
                   {(share) => (
                     <tr>
                       <td data-label={t("workspace.file")}>
-                        {share.file_path}
-                        <small>{share.share_id}</small>
+                        <div class="atp-shared-file">
+                          <FiFileText aria-hidden="true" />
+                          <div>
+                            <strong>
+                              {share.file_name ||
+                                share.file_path.split("/").pop()}
+                            </strong>
+                            <small>{share.file_path}</small>
+                            <small>{share.share_id}</small>
+                            <Show when={share.note}>
+                              <small>{share.note}</small>
+                            </Show>
+                          </div>
+                        </div>
+                      </td>
+                      <td data-label={t("workspace.status")}>
+                        <span class="atp-link-status" data-state={state(share)}>
+                          {t("workspace.link_" + state(share))}
+                        </span>
+                        <Show when={share.has_password}>
+                          <small>{t("workspace.password_protected")}</small>
+                        </Show>
                       </td>
                       <td data-label={t("workspace.expiry")}>
                         {share.expires_at || t("workspace.no_expiry")}
@@ -134,11 +178,18 @@ export default function CustomShares() {
                         {share.download_count || 0} /{" "}
                         {share.max_downloads || "∞"}
                       </td>
-                      <td data-label={t("workspace.note")}>
-                        {share.note || "—"}
-                      </td>
                       <td data-label={t("workspace.actions")}>
                         <div class="atp-row-actions">
+                          <Button
+                            as="a"
+                            href={urlFor(share)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            size="sm"
+                            aria-label={t("workspace.open_shared_link")}
+                          >
+                            <FiExternalLink aria-hidden="true" />
+                          </Button>
                           <Button size="sm" onClick={() => copy(share)}>
                             {t("global.copy")}
                           </Button>
@@ -155,6 +206,19 @@ export default function CustomShares() {
                 </For>
               </tbody>
             </table>
+            <div class="atp-table-pagination">
+              <span>
+                {t("workspace.shared_link_count", {
+                  count: String(filtered().length),
+                })}
+              </span>
+              <Paginator
+                total={filtered().length}
+                defaultPageSize={20}
+                onChange={setPage}
+                setResetCallback={(fn) => (resetPage = fn)}
+              />
+            </div>
           </div>
         </Show>
       </Show>

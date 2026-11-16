@@ -4,6 +4,7 @@ import pathlib,subprocess,sys
 b=pathlib.Path(sys.argv[1]).resolve()
 assert b.parent==pathlib.Path('/root/atp-alist-ui-backups') and (b/'config.json').is_file()
 root=pathlib.Path('/www/wwwroot/file.atpwebhost.com')
+if (b/'share-inject.js').is_file():(root/'share-app/share-inject.js').write_bytes((b/'share-inject.js').read_bytes())
 (root/'data/config.json').write_bytes((b/'config.json').read_bytes())
 if (b/'download.php').is_file():(root/'share-app/download.php').write_bytes((b/'download.php').read_bytes())
 pathlib.Path('/www/server/panel/vhost/nginx/extension/file.atpwebhost.com/share_app.conf').write_bytes((b/'share_app.conf').read_bytes())

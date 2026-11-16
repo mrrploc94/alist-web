@@ -5,3 +5,4 @@ dist
 !/src/lang/vi/
 .DS_Store
 .idea
+__pycache__/

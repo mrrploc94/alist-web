@@ -8,7 +8,7 @@ Core Docker xhofe/alist:v3.66.0 ARM64 giữ nguyên. UI dùng dist_dir chính th
 Snapshot: /root/atp-alist-ui-backups/20261116T035521Z trên Oracle.
 ops/snapshot-ui.py chụp config, online SQLite backup, container, nginx và sidecar trước khi đổi; chạy Python 3.11.
 
-Release hiện tại: workspace-b-20261116T041129Z.
+Release đợt triển khai đầu: workspace-b-20261116T041129Z.
 Host: /www/wwwroot/file.atpwebhost.com/data/ui-releases/<release>/dist.
 Container: /opt/alist/data/ui-releases/<release>/dist.
 Giữ chunk cũ cho tab trình duyệt đang mở. deploy-ui.py tự khôi phục config nếu health check thất bại. Không đổi image, port, provider token, S3 vhost hoặc lịch Backuply.
@@ -53,3 +53,17 @@ Chép ops/rollback-ui.py lên Oracle rồi chạy:
 Chỉ khôi phục config UI và các file routing đã chụp, nginx -t/reload và restart container. Không phục hồi database đang dùng hoặc ghi đè Share/user/ổ lưu trữ mới phát sinh. Giữ UI release và snapshot cũ.
 
 Đối chiếu sau dọn: 47 hàng Share tùy biến gốc và các hàng users/roles/meta/native shares trùng snapshot. Cấu hình ổ lưu trữ cố định trùng snapshot; AList tự cập nhật refresh_token của Yandex/OneDrive và Headers/HeaderTime của Sharelink, đồng thời đánh giá lại status khi khởi động. Không khôi phục token cũ. Source sidecar chỉ thay download.php ở đoạn dispatch đã nêu. Bằng chứng riêng trên Oracle: final-integrity.json trong snapshot.
+
+## File và Share — đợt cập nhật tiếp theo
+
+- Live release: workspace-b-20261116T055440Z.
+- Snapshot riêng trước đợt này: /root/atp-alist-ui-backups/20261116T052619Z.
+- Bản trước/sau và ảnh sáng/tối: docs/exterior/so-sanh.html.
+- Deploy UI qua dist_dir, core Docker v3.66.0 giữ nguyên. Sidecar assets: share-workspace.css/js; canonical CSS nằm tại src/app/share-workspace.css, enhancer tại ops/sidecar/share-workspace.js.
+- Apply presentation hooks bằng ops/patch-share-exterior.py trên đúng source live đã snapshot, sau đó ops/fix-share-download-form.py. Không sao chép config.php hay ghi đè từ repo sidecar khác. Khi cập nhật các lần sau chỉ thay assets đã kiểm tra; script patch sẽ dừng nếu hook đã tồn tại.
+- Build production qua. Kiểm tra live sáng/tối ở 375/1280/1920: không rail cũ, menu đầy đủ và không tràn ngang; modal và menu đã xem ảnh sau khi animation hoàn tất.
+- Qua 9 kiểm tra modal thật: che/hiện password, chọn thời hạn riêng, tạo, URL kết quả, copy, thu hồi đúng link thử, phân trang và lọc. Public view đã thử password sai/đúng, download bằng nút POST và so byte; thử trang hết hạn ở sáng/tối. Native share vẫn render đúng file thử.
+- Hope UI dùng active descendant cho menu; đã xác minh mở bằng ArrowDown. Chọn file có đúng một tóm tắt, bỏ chọn hoạt động. Các check desktop/mobile chạy qua domain production sau deploy.
+- S3 HEAD/GET/Range đã xác minh lại sau restart UI; không thay lịch backup hoặc gateway.
+- Sau dọn fixture: 47 Share cũ, user, role, metadata, native shares và cấu hình cố định của storage đều trùng snapshot. Chỉ hai source sidecar sẵn có thay đổi: download.php (trình bày và CTA) và share-inject.js (nạp enhancer). config.php và ShareDB.php giữ nguyên.
+- Rollback riêng đợt này: python3.11 /root/atp-alist-ui-backups/20261116T052619Z/rollback-ui.py /root/atp-alist-ui-backups/20261116T052619Z. Script khôi phục cả injector và PHP view, không phục hồi DB đang dùng.

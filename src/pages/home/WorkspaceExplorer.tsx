@@ -50,13 +50,23 @@ export const ExplorerHeader = () => {
   )
 }
 export const ExplorerHeading = () => {
-  const t = useT()
+  const t = useT(),
+    { pathname } = useRouter()
+  const folderName = () => {
+    const name = pathname().split("/").filter(Boolean).pop()
+    if (!name) return t("workspace.all_files")
+    try {
+      return decodeURIComponent(name)
+    } catch {
+      return name
+    }
+  }
   const canWrite = () =>
     objStore.state === State.Folder && (userCan("write") || objStore.write)
   return (
     <header class="atp-file-heading">
       <div>
-        <h1>{t("workspace.all_files")}</h1>
+        <h1>{folderName()}</h1>
         <p>{t("workspace.file_description")}</p>
       </div>
       <div class="atp-file-actions">

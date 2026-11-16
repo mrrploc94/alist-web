@@ -52,6 +52,7 @@ import {
   LinkWithBase,
   Paginator,
   SelectWrapper,
+  SwitchColorMode,
 } from "~/components"
 import { Container } from "~/pages/home/Container"
 import GridLayout from "~/pages/home/folder/Grid"
@@ -334,6 +335,7 @@ const resetObjStore = () => {
 }
 
 const ShareHeader = (props: { showLayout: boolean }) => {
+  const t = useT()
   const logos = getSetting("logo").split("\n")
   const defaultLogo =
     logos[0] === "https://cdn.jsdelivr.net/gh/alist-org/logo@main/logo.svg"
@@ -348,7 +350,11 @@ const ShareHeader = (props: { showLayout: boolean }) => {
   )
 
   return (
-    <Center bgColor="$background" class="header" w="$full">
+    <Center
+      bgColor="$background"
+      class="header atp-native-share-header"
+      w="$full"
+    >
       <Container>
         <HStack
           px="calc(2% + 0.5rem)"
@@ -358,12 +364,23 @@ const ShareHeader = (props: { showLayout: boolean }) => {
         >
           <LinkWithBase href="/">
             <HStack h="44px">
-              <Image src={logo()!} h="$full" w="auto" />
+              <Image
+                src={logo()!}
+                alt={getSetting("site_title")}
+                h="$full"
+                w="auto"
+              />
+              <Text class="atp-share-brand-label">
+                {t("workspace.shared_files")}
+              </Text>
             </HStack>
           </LinkWithBase>
-          <Show when={props.showLayout}>
-            <Layout />
-          </Show>
+          <HStack spacing="$3">
+            <Show when={props.showLayout}>
+              <Layout />
+            </Show>
+            <SwitchColorMode />
+          </HStack>
         </HStack>
       </Container>
     </Center>

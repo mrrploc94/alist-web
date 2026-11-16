@@ -144,5 +144,14 @@
     "proxy_webdav": "Proxy & WebDAV",
     "sort_index_sign": "Sort, index & signatures"
   },
-  "scope": "Scope"
+  "scope": "Scope",
+  "more_actions": "Actions",
+  "item_count": "{{count}} items",
+  "shared_link_count": "{{count}} shared links",
+  "link_active": "Active",
+  "link_expired": "Expired",
+  "link_revoked": "Revoked",
+  "password_protected": "Password protected",
+  "open_shared_link": "Open shared link",
+  "shared_files": "Shared files"
 }

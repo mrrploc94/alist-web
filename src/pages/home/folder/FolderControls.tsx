@@ -1,6 +1,6 @@
 import { For, Show } from "solid-js"
 import { FiList, FiGrid, FiImage, FiSearch, FiRefreshCw } from "solid-icons/fi"
-import { getSetting, layout, setLayout, LayoutType } from "~/store"
+import { getSetting, layout, setLayout, LayoutType, objStore } from "~/store"
 import { usePath, useT } from "~/hooks"
 import { bus } from "~/utils"
 export const FolderControls = () => {
@@ -25,7 +25,14 @@ export const FolderControls = () => {
           <kbd>Ctrl K</kbd>
         </button>
       </Show>
-      <div class="atp-layout-switch" aria-label={t("workspace.view_mode")}>
+      <span class="atp-file-count">
+        {t("workspace.item_count", { count: String(objStore.objs.length) })}
+      </span>
+      <div
+        class="atp-layout-switch"
+        role="group"
+        aria-label={t("workspace.view_mode")}
+      >
         <For each={modes}>
           {([mode, Icon]) => (
             <button

@@ -17,6 +17,7 @@ import {
   VStack,
 } from "@hope-ui/solid"
 import { BiSolidRightArrow, BiSolidFolderOpen } from "solid-icons/bi"
+import { FiChevronRight, FiFolder } from "solid-icons/fi"
 import {
   Accessor,
   createContext,
@@ -119,6 +120,7 @@ export const FolderTree = (props: FolderTreeProps) => {
 }
 
 const FolderTreeNode = (props: { path: string; isRoot?: boolean }) => {
+  const t = useT()
   const { isHidePath } = useUtil()
   const [children, setChildren] = createSignal<Obj[]>()
   const {
@@ -188,7 +190,11 @@ const FolderTreeNode = (props: { path: string; isRoot?: boolean }) => {
   return (
     <Show when={showHiddenFolder || !isHiddenFolder()}>
       <Box>
-        <HStack spacing="$2">
+        <HStack
+          class="atp-tree-row"
+          classList={{ "atp-tree-active": active() }}
+          spacing="$2"
+        >
           <Show
             when={!loading()}
             fallback={<Spinner size="sm" color={getMainColor()} />}
@@ -197,22 +203,35 @@ const FolderTreeNode = (props: { path: string; isRoot?: boolean }) => {
               when={!emptyIconVisible()}
               fallback={<Icon color={getMainColor()} as={BiSolidFolderOpen} />}
             >
-              <Icon
-                color={getMainColor()}
-                as={BiSolidRightArrow}
-                transform={isOpen() ? "rotate(90deg)" : "none"}
-                transition="transform 0.2s"
-                cursor="pointer"
+              <button
+                type="button"
+                class="atp-tree-toggle"
+                aria-label={
+                  t("workspace.folders") +
+                  ": " +
+                  (props.path === "/"
+                    ? t("manage.sidemenu.home")
+                    : pathBase(props.path))
+                }
+                aria-expanded={isOpen()}
                 onClick={() => {
                   onToggle()
-                  if (isOpen()) {
-                    load()
-                  }
+                  if (isOpen()) load()
                 }}
-              />
+              >
+                <FiChevronRight
+                  aria-hidden="true"
+                  style={{ transform: isOpen() ? "rotate(90deg)" : "none" }}
+                />
+              </button>
             </Show>
           </Show>
+          <FiFolder class="atp-tree-folder" aria-hidden="true" />
           <Text
+            as="button"
+            type="button"
+            class="atp-tree-name"
+            aria-current={active() ? "page" : undefined}
             css={{
               whiteSpace: "nowrap",
             }}
@@ -228,7 +247,9 @@ const FolderTreeNode = (props: { path: string; isRoot?: boolean }) => {
               onChange(props.path)
             }}
           >
-            {props.path === "/" ? "root" : pathBase(props.path)}
+            {props.path === "/"
+              ? t("manage.sidemenu.home")
+              : pathBase(props.path)}
           </Text>
         </HStack>
         <Show when={isOpen()}>

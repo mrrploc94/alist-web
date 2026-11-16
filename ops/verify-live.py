@@ -22,10 +22,10 @@ def save():statepath.write_text(json.dumps(state,indent=2));os.chmod(statepath,0
 if len(sys.argv)>1 and sys.argv[1]=='cleanup':
  state=json.loads(statepath.read_text())
  for share in state.get('custom',[]):
-  db=sqlite3.connect('/www/wwwroot/file.atpwebhost.com/share-app/db/shares.db');row=db.execute('select id from shares where share_id=? and note=?',(share['share_id'],state['marker'])).fetchone();db.close();assert row,'Marker-bound share fixture required';share['id']=row[0]
+  db=sqlite3.connect('/www/wwwroot/file.atpwebhost.com/share-app/db/shares.db');row=db.execute("select id from shares where share_id=? and file_path=? and coalesce(note,'')=?",(share['share_id'],state['path'],share.get('probe_note',state['marker']))).fetchone();db.close();assert row,'Marker-bound share fixture required';share['id']=row[0]
   _,body=http('https://file.atpwebhost.com/share-app/api.php?action=delete',{'id':share['id']},headers={'Authorization':'Bearer '+token});assert json.loads(body).get('code')==200
   # Remove only this synthetic, marker-bound row after exercising the normal revocation API.
-  db=sqlite3.connect('/www/wwwroot/file.atpwebhost.com/share-app/db/shares.db');db.execute('delete from shares where id=? and note=?',(share['id'],state['marker']));db.commit();db.close()
+  db=sqlite3.connect('/www/wwwroot/file.atpwebhost.com/share-app/db/shares.db');db.execute("delete from shares where id=? and coalesce(note,'')=?",(share['id'],share.get('probe_note',state['marker'])));db.commit();db.close()
  if state.get('native'):api('/share/delete',{'share_id':state['native']['share_id']})
  r=s3.request('DELETE','/backuply-yandex/'+state['key'],base='https://s3.atpweb.vn');assert r[0] in [200,204]
  state['cleaned']=True;save();print('Synthetic object and both share fixtures cleaned');sys.exit()

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="vi">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>AList · File và Share mới</title
+  ><style>
+    body {
+      font: 14px/1.6 system-ui;
+      margin: 0;
+      background: #f6f8fb;
+      color: #222a35;
+    }
+    main {
+      max-width: 1440px;
+      margin: auto;
+      padding: 32px;
+    }
+    h1 {
+      font-size: 26px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 40px;
+    }
+    section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    figure {
+      margin: 0;
+      min-width: 0;
+    }
+    img {
+      display: block;
+      width: 100%;
+      border: 1px solid #e4e9ef;
+      border-radius: 10px;
+    }
+    .mobile img {
+      max-width: 375px;
+    }
+    figcaption {
+      margin: 12px 0;
+    }
+    a {
+      color: #0966be;
+    }
+    @media (max-width: 700px) {
+      main {
+        padding: 20px;
+      }
+      section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <main>
+    <h1>File và Share Link đã thiết kế lại</h1>
+    <p>
+      Bản live, dữ liệu thật; ảnh Share dùng file kiểm tra riêng đã dọn sau xác
+      minh. <a href="https://file.atpwebhost.com">Mở AList</a>
+    </p>
+    <h2>Trước / sau · cùng khổ 1280px</h2>
+    <section>
+      <figure>
+        <figcaption>Trước: khu File phiên bản B ban đầu</figcaption>
+        <img src="before-files-1280.png" alt="File trước sửa" />
+      </figure>
+      <figure>
+        <figcaption>Sau: cây thư mục mới, menu có nhãn, bố cục rộng</figcaption>
+        <img src="exterior-light-1280.png" alt="File mới" />
+      </figure>
+    </section>
+    <h2>Giao diện tối</h2>
+    <img src="exterior-dark-1280.png" alt="File giao diện tối" />
+    <h2>Điện thoại và form Share</h2>
+    <section class="mobile">
+      <figure>
+        <figcaption>Khu File</figcaption>
+        <img src="exterior-dark-375.png" alt="File điện thoại" />
+      </figure>
+      <figure>
+        <figcaption>Tạo Share Link</figcaption>
+        <img src="exterior-share-light-375.png" alt="Form Share mới" />
+      </figure>
+    </section>
+    <h2>Trang người nhận link</h2>
+    <section class="mobile">
+      <figure>
+        <figcaption>Nhập mật khẩu</figcaption>
+        <img src="public-password-light-375.png" alt="Nhập mật khẩu" />
+      </figure>
+      <figure>
+        <figcaption>Tải file · giao diện tối</figcaption>
+        <img src="public-download-dark-375.png" alt="Trang tải file" />
+      </figure>
+    </section>
+    <h2>Link hết hạn</h2>
+    <figure class="mobile">
+      <img src="public-expired-light-375.png" alt="Trạng thái hết hạn" />
+    </figure>
+  </main>
+</html>

@@ -36,3 +36,15 @@ Dữ liệu giả và nhãn bản mẫu được thay bằng API thật. Không 
 ## Kiểm tra thị giác
 
 Card cùng loại có chiều cao tối thiểu nhất quán; thao tác có nền/viền rõ; mỗi khối một viền ngoài. Ở 1920px khoảng rộng giới hạn phục vụ khả năng đọc, sidebar vẫn truy cập được. Hành động chính là upload hoặc mở phần quản trị tương ứng. 375px không tràn ngang trong sweep 25 route. So bản mẫu và live: docs/qa/so-sanh.html.
+
+## 16/11/2026 — thiết kế lại File và toàn bộ Share theo yêu cầu bổ sung
+
+Khu File dùng khung rộng toàn màn hình: rail cây thư mục bên trái, nội dung bên phải; header luôn truy cập được khi cuộn. Hành động chính nằm ngang; menu Thao tác có nhãn thay cột icon cũ, không tự bung từ tùy chọn more-open. Giữ mọi handler và điều kiện quyền, gồm STRM, offline, dọn thư mục và thao tác hàng loạt.
+
+Danh sách tăng cỡ chữ và chiều cao dòng; trạng thái chọn hiển thị một bản tóm tắt thay nhiều bản lặp theo từng file. Share custom có phân trang, trạng thái, mật khẩu và đường dẫn dễ đọc. Không bỏ ghi chú, hạn dùng, số lượt hoặc nút thu hồi.
+
+Share sidecar dùng cùng token và bố cục phẳng cho modal, quản lý link, trang mật khẩu, tải file và lỗi/hết hạn. Script tăng cường chỉ xử lý trình bày, nhãn ARIA, focus, tab và nút hiện mật khẩu. Các API, ShareDB, giới hạn và xác minh password gốc giữ nguyên. Riêng CTA sau khi nhập mật khẩu chuyển thành form POST để mang password đến request download; không đưa password lên URL.
+
+Trang Share native có cùng header/logo, chuyển sáng tối và khung nội dung. Mọi theme/locale đã lưu được giữ. Logo ATP được đặt trên nền trắng nhỏ trong theme tối để đọc được nguyên bản.
+
+Đã soi ảnh 375/1280/1920: dòng cùng loại cao đều; link/thao tác phân biệt rõ; một viền ngoài mỗi vùng; File rộng dùng cho bảng, trang tải thu gọn phục vụ một tệp; nút upload/tạo link/tải xuống là trọng tâm từng màn. Trước/sau: docs/exterior/so-sanh.html.

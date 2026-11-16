@@ -63,7 +63,7 @@ export const cols: Col[] = [
 ]
 
 // 添加选中统计组件
-const SelectionStats = () => {
+export const SelectionStats = () => {
   const selected = selectedObjs
   const totalSize = createMemo(() => {
     return selected().reduce<number>((acc, obj) => acc + (obj.size || 0), 0)
@@ -72,6 +72,8 @@ const SelectionStats = () => {
   return (
     <Show when={selected().length > 0}>
       <HStack
+        class="atp-selection-summary"
+        role="status"
         spacing="$2"
         position="fixed"
         top="$4"
@@ -423,7 +425,6 @@ export const ListItem = (props: { obj: StoreObj & Obj; index: number }) => {
           </Show>
         </VStack>
       </Motion.div>
-      <SelectionStats />
     </>
   )
 }
