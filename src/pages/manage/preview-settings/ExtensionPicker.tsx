@@ -102,7 +102,7 @@ export const ExtensionPicker = (props: {
   const [draft, setDraft] = createSignal("")
 
   return (
-    <HStack spacing="$2" w="$full">
+    <HStack class="atp-extension-picker" spacing="$2" w="$full">
       <Select value={props.value} onChange={props.onChange}>
         <SelectTrigger w="$48">
           <SelectPlaceholder>{t("global.choose")}</SelectPlaceholder>

@@ -101,6 +101,6 @@
     "uuid": "^11.1.0"
   },
   "lint-staged": {
-    "**/*": "prettier --write"
+    "**/*.{js,ts,jsx,tsx,json,css,html,md,yml,yaml}": "prettier --write"
   }
 }

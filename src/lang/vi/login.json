@@ -1,0 +1,18 @@
+{
+  "login_to": "Đăng nhập vào",
+  "username-tips": "Nhập tên đăng nhập",
+  "password-tips": "Nhập mật khẩu",
+  "otp-tips": "Nhập mã OTP",
+  "remember": "Ghi nhớ đăng nhập",
+  "password_login": "Đăng nhập",
+  "forget": "Quên mật khẩu?",
+  "forget_url": "https://alistgo.com/faq/howto.html#how-to-get-password-if-i-forget-it",
+  "clear": "Xóa nội dung",
+  "login": "Đăng nhập",
+  "use_guest": "Duyệt với tư cách khách",
+  "success": "Đăng nhập thành công",
+  "register": "Đăng ký",
+  "go_login": "Đến trang đăng nhập",
+  "register_disabled": "Đăng ký đang tắt",
+  "register_success": "Đăng ký thành công"
+}

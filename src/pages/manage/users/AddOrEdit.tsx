@@ -30,6 +30,7 @@ import { PEmptyResp, PResp, User } from "~/types"
 import { createStore } from "solid-js/store"
 import { For, Show, createSignal } from "solid-js"
 import { me } from "~/store"
+import { MaskedInput } from "~/components/workspace/MaskedInput"
 import { PublicKeys } from "./PublicKeys"
 import { getRoleList } from "~/utils/api"
 
@@ -89,7 +90,7 @@ const AddOrEdit = () => {
     <VStack spacing="$2" alignItems="start" w="$full">
       <Heading>{id ? t("global.edit") : t("global.add")}</Heading>
       <MaybeLoading loading={userLoading() || rolesLoading()}>
-        <VStack spacing="$2" alignItems="start" w="$full">
+        <VStack class="atp-user-form" spacing="$2" alignItems="start" w="$full">
           <Show when={!id || !(user.role_info || []).includes(1)}>
             <FormControl
               w="$full"
@@ -100,7 +101,7 @@ const AddOrEdit = () => {
               <FormLabel for="username" display="flex" alignItems="center">
                 {t(`users.username`)}
               </FormLabel>
-              <Input
+              <MaskedInput
                 id="username"
                 value={user.username}
                 onInput={(e) => setUser("username", e.currentTarget.value)}
@@ -115,7 +116,7 @@ const AddOrEdit = () => {
               <FormLabel for="password" display="flex" alignItems="center">
                 {t(`users.password`)}
               </FormLabel>
-              <Input
+              <MaskedInput
                 id="password"
                 type="password"
                 placeholder="********"
@@ -135,11 +136,17 @@ const AddOrEdit = () => {
               <FormLabel for="base_path" display="flex" alignItems="center">
                 {t(`users.base_path`)}
               </FormLabel>
-              <Input id="base_path" value="/" readOnly />
+              <MaskedInput id="base_path" value="/" readOnly />
             </FormControl>
           </Show>
 
-          <FormControl w="$full" display="flex" flexDirection="column" required>
+          <FormControl
+            class="atp-span-all"
+            w="$full"
+            display="flex"
+            flexDirection="column"
+            required
+          >
             <FormLabel display="flex" alignItems="center">
               {t(`users.role`)}
             </FormLabel>
@@ -241,7 +248,7 @@ const AddOrEdit = () => {
             <FormLabel for="max_devices" display="flex" alignItems="center">
               {t(`users.max_devices`)}
             </FormLabel>
-            <Input
+            <MaskedInput
               id="max_devices"
               type="number"
               value={user.max_devices ?? ""}
@@ -260,7 +267,7 @@ const AddOrEdit = () => {
             <FormLabel for="session_ttl" display="flex" alignItems="center">
               {t(`users.session_ttl`)}
             </FormLabel>
-            <Input
+            <MaskedInput
               id="session_ttl"
               type="number"
               value={user.session_ttl ?? ""}

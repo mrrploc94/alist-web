@@ -1,3 +1,4 @@
+import { MaskedInput } from "~/components/workspace/MaskedInput"
 import {
   Alert,
   AlertDescription,
@@ -167,7 +168,7 @@ const Profile = () => {
         <SimpleGrid gap="$2" columns={{ "@initial": 1, "@md": 2 }}>
           <FormControl>
             <FormLabel for="username">{t("users.change_username")}</FormLabel>
-            <Input
+            <MaskedInput
               id="username"
               value={username()}
               onInput={(e) => {
@@ -179,7 +180,7 @@ const Profile = () => {
         <SimpleGrid gap="$2" columns={{ "@initial": 1, "@md": 2 }}>
           <FormControl>
             <FormLabel for="password">{t("users.change_password")}</FormLabel>
-            <Input
+            <MaskedInput
               id="password"
               type="password"
               placeholder="********"
@@ -194,7 +195,7 @@ const Profile = () => {
             <FormLabel for="confirm-password">
               {t("users.confirm_password")}
             </FormLabel>
-            <Input
+            <MaskedInput
               id="confirm-password"
               type="password"
               placeholder="********"

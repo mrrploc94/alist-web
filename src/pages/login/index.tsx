@@ -332,8 +332,8 @@ const Login = () => {
   const logo = () => getSetting("logo").split("\n")[0]
 
   return (
-    <Center zIndex="1" w="$full" h="100vh">
-      <VStack spacing="$6" alignItems="center">
+    <Center as="main" class="atp-login" zIndex="1" w="$full" minH="100dvh">
+      <VStack class="atp-login-stack" spacing="$6" alignItems="center">
         <Show when={useNewVersion()}>
           <HStack alignItems="center" spacing="$2">
             <Image
@@ -354,6 +354,7 @@ const Login = () => {
           when={useNewVersion()}
           fallback={
             <VStack
+              class="atp-login-card"
               bgColor={bgColor()}
               rounded="$xl"
               p="24px"
@@ -374,6 +375,8 @@ const Login = () => {
                 fallback={
                   <Input
                     id="totp"
+                    aria-label={t("login.otp-tips")}
+                    autocomplete="one-time-code"
                     name="otp"
                     placeholder={t("login.otp-tips")}
                     value={opt()}
@@ -387,6 +390,8 @@ const Login = () => {
                 }
               >
                 <Input
+                  aria-label={t("login.username-tips")}
+                  autocomplete="username"
                   name="username"
                   placeholder={t("login.username-tips")}
                   value={username()}
@@ -394,6 +399,10 @@ const Login = () => {
                 />
                 <Show when={!useauthn()}>
                   <Input
+                    aria-label={t("login.password-tips")}
+                    autocomplete={
+                      isRegisterMode() ? "new-password" : "current-password"
+                    }
                     name="password"
                     placeholder={t("login.password-tips")}
                     type="password"
@@ -519,6 +528,7 @@ const Login = () => {
         >
           {/* 新版本的登录表单 */}
           <VStack
+            class="atp-login-card"
             bgColor={bgColor()}
             rounded="$xl"
             p="24px"
@@ -541,6 +551,8 @@ const Login = () => {
               fallback={
                 <Input
                   id="totp"
+                  aria-label={t("login.otp-tips")}
+                  autocomplete="one-time-code"
                   name="otp"
                   placeholder={t("login.otp-tips")}
                   value={opt()}
@@ -568,6 +580,8 @@ const Login = () => {
               >
                 <Icon as={FiUser} color="$neutral8" boxSize="$5" />
                 <Input
+                  aria-label={t("login.username-tips")}
+                  autocomplete="username"
                   name="username"
                   placeholder={t("login.username-tips")}
                   value={username()}
@@ -603,6 +617,10 @@ const Login = () => {
                 >
                   <Icon as={FiLock} color="$neutral8" boxSize="$5" />
                   <Input
+                    aria-label={t("login.password-tips")}
+                    autocomplete={
+                      isRegisterMode() ? "new-password" : "current-password"
+                    }
                     name="password"
                     placeholder={t("login.password-tips")}
                     type={showPassword() ? "text" : "password"}
@@ -633,7 +651,11 @@ const Login = () => {
                     icon={showPassword() ? <FiEyeOff /> : <FiEye />}
                     onClick={() => setShowPassword(!showPassword())}
                     color="$neutral8"
-                    aria-label={showPassword() ? "隐藏密码" : "显示密码"}
+                    aria-label={t(
+                      showPassword()
+                        ? "workspace.hide_secret"
+                        : "workspace.show_secret",
+                    )}
                     _hover={{
                       backgroundColor: "$neutral3",
                     }}

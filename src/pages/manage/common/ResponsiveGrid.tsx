@@ -11,10 +11,13 @@ export const ResponsiveGrid = (props: { children: JSXElement }) => {
   return (
     <Grid
       w="$full"
-      gap="$2"
+      class="atp-responsive-form"
+      gap="$5"
       templateColumns={{
         "@initial": "1fr",
-        "@lg": v,
+        "@lg": v
+          ? "repeat(auto-fit, minmax(min(300px, 100%), 1fr))"
+          : undefined,
       }}
     >
       {props.children}

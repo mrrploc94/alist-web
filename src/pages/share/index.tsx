@@ -1131,7 +1131,8 @@ const SharePage = () => {
       />
       <Container>
         <VStack
-          class="body"
+          as="main"
+          class="body atp-public-share"
           mt="$1"
           py="$2"
           px="2%"
@@ -1140,6 +1141,7 @@ const SharePage = () => {
           gap="$4"
         >
           <VStack
+            class="atp-share-summary"
             w="$full"
             p="$4"
             rounded="$xl"

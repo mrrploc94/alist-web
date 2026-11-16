@@ -183,7 +183,7 @@ export const Task = (props: TaskAttribute & TasksProps & TaskLocalSetter) => {
   }
   return (
     <Show when={!deleted()}>
-      <HStack w="$full" p="$2">
+      <HStack class="atp-task-row" w="$full" p="$2">
         <HStack w={cols[0].w} spacing="$1">
           <Checkbox
             // colorScheme="neutral"

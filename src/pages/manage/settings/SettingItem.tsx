@@ -21,6 +21,7 @@ import {
 import { For, Match, Show, Switch } from "solid-js"
 import { useT } from "~/hooks"
 import { Flag, SettingItem, Type } from "~/types"
+import { MaskedInput } from "~/components/workspace/MaskedInput"
 import { TiDelete } from "solid-icons/ti"
 
 // 角色数字到字符串的映射
@@ -48,7 +49,13 @@ export type ItemProps = SettingItem & {
 const Item = (props: ItemProps) => {
   const t = useT()
   return (
-    <FormControl w={props.w ?? "100%"} display="flex" flexDirection="column">
+    <FormControl
+      class={`atp-setting-field atp-field-${props.type}`}
+      data-setting-key={props.key}
+      w={props.w ?? "100%"}
+      display="flex"
+      flexDirection="column"
+    >
       <Show when={!props.hideLabel}>
         <FormLabel for={props.key} display="flex" alignItems="center">
           {t(`settings.${props.key}`)}
@@ -69,7 +76,10 @@ const Item = (props: ItemProps) => {
       </Show>
       <Switch fallback={<Center>{t("settings_other.unknown_type")}</Center>}>
         <Match when={[Type.String, Type.Number].includes(props.type)}>
-          <Input
+          <MaskedInput
+            secret={/password|secret|token|cookie|access_key_id/i.test(
+              props.key,
+            )}
             type={props.type === Type.Number ? "number" : ""}
             id={props.key}
             // value={props.value()}

@@ -12,6 +12,7 @@ const LoginBg = (props: LoginBgProps) => {
   const bgColor = useColorModeValue("#a9c6ff", "#062b74")
   return (
     <Box
+      class="atp-login-background"
       bgColor={props.useNewVersion ? undefined : bgColor()}
       style={
         props.useNewVersion

@@ -47,7 +47,6 @@ export const Modal = () => {
 export const Toolbar = () => {
   return (
     <Portal>
-      <Right />
       <Center />
       <Modal />
       <BackTop />

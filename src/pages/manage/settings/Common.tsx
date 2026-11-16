@@ -3,7 +3,11 @@ import { Group, SettingItem, PResp, PEmptyResp, EmptyResp } from "~/types"
 import { r, notify, getTarget, handleResp } from "~/utils"
 import { createStore } from "solid-js/store"
 import { Button, HStack, VStack } from "@hope-ui/solid"
-import { createSignal, Index, createMemo } from "solid-js"
+import { createSignal, Index, For, createMemo } from "solid-js"
+import {
+  FormSection,
+  getSettingSections,
+} from "~/components/workspace/SettingsSections"
 import { Item } from "./SettingItem"
 import { ResponsiveGrid } from "../common/ResponsiveGrid"
 
@@ -70,30 +74,36 @@ const CommonSettings = (props: CommonSettingsProps) => {
 
   return (
     <VStack w="$full" alignItems="start" spacing="$2">
-      <ResponsiveGrid>
-        <Index each={sortedSettings()}>
-          {(item, _) => (
-            <Item
-              {...item()}
-              onChange={(val) => {
-                setSettings((i) => item().key === i.key, "value", val)
-              }}
-              onDelete={async () => {
-                setLoading(true)
-                const resp: EmptyResp = await r.post(
-                  `/admin/setting/delete?key=${item().key}`,
-                )
-                setLoading(false)
-                handleResp(resp, () => {
-                  notify.success(t("global.delete_success"))
-                  refresh()
-                })
-              }}
-            />
+      <div class="atp-settings-sections">
+        <For each={getSettingSections(props.group, sortedSettings())}>
+          {(section) => (
+            <FormSection title={t(`workspace.sections.${section.title}`)}>
+              <Index each={section.items}>
+                {(item, _) => (
+                  <Item
+                    {...item()}
+                    onChange={(val) => {
+                      setSettings((i) => item().key === i.key, "value", val)
+                    }}
+                    onDelete={async () => {
+                      setLoading(true)
+                      const resp: EmptyResp = await r.post(
+                        `/admin/setting/delete?key=${item().key}`,
+                      )
+                      setLoading(false)
+                      handleResp(resp, () => {
+                        notify.success(t("global.delete_success"))
+                        refresh()
+                      })
+                    }}
+                  />
+                )}
+              </Index>
+            </FormSection>
           )}
-        </Index>
-      </ResponsiveGrid>
-      <HStack spacing="$2">
+        </For>
+      </div>
+      <HStack spacing="$2" class="atp-form-actions">
         <Button
           colorScheme="accent"
           onClick={refresh}
