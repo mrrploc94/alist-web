@@ -13,6 +13,7 @@ import {
 } from "~/types"
 import { createStore, produce } from "solid-js/store"
 import { Item } from "./Item"
+import { FormSection } from "~/components/workspace/SettingsSections"
 import { ResponsiveGrid } from "../common/ResponsiveGrid"
 
 interface DriverInfo {
@@ -183,45 +184,109 @@ const AddOrEdit = () => {
           </Alert>
         </Show>
       </VStack>
-      <ResponsiveGrid>
-        <Show when={drivers()[storage.driver]}>
-          <For each={drivers()[storage.driver].common}>
-            {(item) => (
-              <Item
-                {...item}
-                driver="common"
-                additionValues={addition}
-                value={(storage as any)[item.name]}
-                onChange={(val: any) => {
-                  setStorage(item.name as keyof Storage, val)
-                }}
-              />
-            )}
-          </For>
-          <For each={drivers()[storage.driver].additional}>
-            {(item) => (
-              <Show
-                when={isItemVisible(
-                  item,
-                  addition,
-                  drivers()[storage.driver].additional,
-                )}
-              >
+      <Show when={drivers()[storage.driver]}>
+        <div class="atp-storage-form">
+          <FormSection title={t("workspace.sections.mount_identity")}>
+            <For
+              each={drivers()[storage.driver].common.filter((item) =>
+                ["mount_path", "order", "remark", "cache_expiration"].includes(
+                  item.name,
+                ),
+              )}
+            >
+              {(item) => (
                 <Item
                   {...item}
-                  driver={storage.driver}
+                  driver="common"
                   additionValues={addition}
-                  value={addition[item.name] as any}
-                  onChange={(val: any) => {
-                    setAddition(item.name, val)
-                  }}
+                  value={(storage as any)[item.name]}
+                  onChange={(val: any) =>
+                    setStorage(item.name as keyof Storage, val)
+                  }
                 />
-              </Show>
-            )}
-          </For>
-        </Show>
-      </ResponsiveGrid>
+              )}
+            </For>
+          </FormSection>
+          <FormSection title={t("workspace.sections.driver_connection")}>
+            <For each={drivers()[storage.driver].additional}>
+              {(item) => (
+                <Show
+                  when={isItemVisible(
+                    item,
+                    addition,
+                    drivers()[storage.driver].additional,
+                  )}
+                >
+                  <Item
+                    {...item}
+                    driver={storage.driver}
+                    additionValues={addition}
+                    value={addition[item.name] as any}
+                    onChange={(val: any) => setAddition(item.name, val)}
+                  />
+                </Show>
+              )}
+            </For>
+          </FormSection>
+          <FormSection title={t("workspace.sections.proxy_webdav")}>
+            <For
+              each={drivers()[storage.driver].common.filter((item) =>
+                [
+                  "web_proxy",
+                  "webdav_policy",
+                  "down_proxy_url",
+                  "down_proxy_sign",
+                  "proxy_range",
+                ].includes(item.name),
+              )}
+            >
+              {(item) => (
+                <Item
+                  {...item}
+                  driver="common"
+                  additionValues={addition}
+                  value={(storage as any)[item.name]}
+                  onChange={(val: any) =>
+                    setStorage(item.name as keyof Storage, val)
+                  }
+                />
+              )}
+            </For>
+          </FormSection>
+          <FormSection title={t("workspace.sections.sort_index_sign")}>
+            <For
+              each={drivers()[storage.driver].common.filter(
+                (item) =>
+                  ![
+                    "mount_path",
+                    "order",
+                    "remark",
+                    "cache_expiration",
+                    "web_proxy",
+                    "webdav_policy",
+                    "down_proxy_url",
+                    "down_proxy_sign",
+                    "proxy_range",
+                  ].includes(item.name),
+              )}
+            >
+              {(item) => (
+                <Item
+                  {...item}
+                  driver="common"
+                  additionValues={addition}
+                  value={(storage as any)[item.name]}
+                  onChange={(val: any) =>
+                    setStorage(item.name as keyof Storage, val)
+                  }
+                />
+              )}
+            </For>
+          </FormSection>
+        </div>
+      </Show>
       <Button
+        class="atp-save-button"
         mt="$2"
         loading={okLoading()}
         onClick={async () => {

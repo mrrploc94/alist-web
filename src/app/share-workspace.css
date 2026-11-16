@@ -1,0 +1,806 @@
+/* ATP Share — common surface for the existing injector and public PHP views. */
+.atp-share-public {
+  --atp-page: #f6f8fb;
+  --atp-surface: #fff;
+  --atp-text: #222a35;
+  --atp-muted: #5f6c7b;
+  --atp-line: #e4e9ef;
+  --atp-control: #7c8999;
+  --atp-primary: #0966be;
+  --atp-selected: #e8f2ff;
+  --atp-hover: #f0f3f7;
+  --atp-on-primary: #fff;
+  color-scheme: light;
+}
+.atp-share-public:not([data-theme="light"]) {
+  --atp-page: #111820;
+  --atp-surface: #1b2531;
+  --atp-text: #eef3fa;
+  --atp-muted: #b3c0d1;
+  --atp-line: #344251;
+  --atp-control: #718297;
+  --atp-primary: #8ac4ff;
+  --atp-selected: #203f5f;
+  --atp-hover: #273443;
+  --atp-on-primary: #102337;
+  color-scheme: dark;
+}
+.atp-share-public {
+  margin: 0;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--atp-page);
+  color: var(--atp-text);
+  font:
+    14px/1.6 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+.atp-share-public * {
+  box-sizing: border-box;
+}
+.atp-share-public .glow,
+.atp-share-public .pulse {
+  display: none !important;
+}
+.atp-share-public .app-header {
+  position: static;
+  width: 100%;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--atp-line);
+  background: var(--atp-surface);
+  backdrop-filter: none;
+}
+.atp-share-public .app-header nav {
+  width: 100%;
+  max-width: 1120px;
+  margin: auto;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  gap: 20px;
+}
+.atp-share-public .app-logo {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+  text-decoration: none;
+  color: var(--atp-muted);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.atp-share-public .app-logo img {
+  width: 96px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+.atp-share-public .app-logo span {
+  border-left: 1px solid var(--atp-line);
+  padding-left: 18px;
+}
+.atp-share-public .theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: var(--atp-page);
+  border: 1px solid var(--atp-line);
+  border-radius: 9px;
+  color: var(--atp-text);
+  cursor: pointer;
+  box-shadow: none;
+}
+.atp-share-public .theme-toggle:hover {
+  background: var(--atp-hover);
+  transform: none;
+}
+.atp-share-public .theme-toggle .material-symbols-outlined {
+  font-size: 21px;
+}
+.atp-share-public .app-main {
+  display: grid;
+  place-content: center;
+  padding: 48px 24px;
+  min-height: 0;
+  overflow: visible;
+  position: relative;
+}
+.atp-share-public .dl-card {
+  width: min(560px, calc(100vw - 48px));
+  max-width: 100%;
+  padding: 36px;
+  background: var(--atp-surface);
+  border: 1px solid var(--atp-line);
+  border-radius: 14px;
+  text-align: left;
+  box-shadow: none;
+  backdrop-filter: none;
+  animation: none;
+  position: relative;
+}
+.atp-share-public .dl-card::before,
+.atp-share-public .dl-card::after {
+  display: none;
+}
+.atp-share-public .file-icon-wrap,
+.atp-share-public .error-icon-wrap {
+  width: 56px;
+  height: 56px;
+  margin: 0 0 24px;
+  display: grid;
+  place-items: center;
+  background: var(--atp-selected);
+  color: var(--atp-primary);
+  border: 0;
+  border-radius: 12px;
+  box-shadow: none;
+  animation: none;
+}
+.atp-share-public .file-icon-wrap .material-symbols-outlined,
+.atp-share-public .error-icon-wrap .material-symbols-outlined {
+  font-size: 28px;
+  color: inherit;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+.atp-share-public .error-icon-wrap {
+  background: #b8323c18;
+  color: #c33b46;
+}
+.atp-share-public .file-name,
+.atp-share-public .error-title {
+  font:
+    650 24px/1.4 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  letter-spacing: -0.5px;
+  color: var(--atp-text);
+  overflow-wrap: anywhere;
+  word-break: normal;
+  margin: 0 0 12px;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+.atp-share-public .error-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--atp-muted);
+  margin-bottom: 28px;
+  overflow-wrap: anywhere;
+}
+.atp-share-public .file-meta {
+  margin: 0 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 14px;
+  color: var(--atp-muted);
+}
+.atp-share-public .file-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--atp-muted);
+}
+.atp-share-public .file-meta-item .material-symbols-outlined {
+  font-size: 17px;
+  color: var(--atp-muted);
+}
+.atp-share-public .badge-area {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  border-top: 1px solid var(--atp-line);
+  border-bottom: 1px solid var(--atp-line);
+  padding: 20px 0;
+  margin: 0 0 28px;
+  justify-content: stretch;
+  align-items: start;
+}
+.atp-share-public .expiry-badge,
+.atp-share-public .dl-count {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 9px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--atp-muted);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  box-shadow: none;
+  white-space: normal;
+}
+.atp-share-public .expiry-badge .material-symbols-outlined,
+.atp-share-public .dl-count .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--atp-muted);
+}
+.atp-share-public .btn-download,
+.atp-share-public .btn-secondary {
+  display: flex;
+  width: 100%;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 18px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--atp-primary);
+  color: var(--atp-on-primary);
+  border: 1px solid transparent;
+  box-shadow: none;
+  transition: background-color 0.15s;
+  transform: none;
+}
+.atp-share-public .btn-download::before,
+.atp-share-public .btn-download::after {
+  display: none;
+}
+.atp-share-public .btn-download:hover {
+  background: var(--atp-primary);
+  filter: brightness(0.94);
+  box-shadow: none;
+  transform: none;
+}
+.atp-share-public .btn-secondary {
+  background: var(--atp-page);
+  border-color: var(--atp-line);
+  color: var(--atp-text);
+}
+.atp-share-public .btn-secondary:hover {
+  background: var(--atp-hover);
+  box-shadow: none;
+  transform: none;
+}
+.atp-share-public .btn-download .material-symbols-outlined {
+  font-size: 20px;
+}
+.atp-share-public .security-hint {
+  margin: 20px 0 0;
+  justify-content: flex-start;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--atp-muted);
+  letter-spacing: 0;
+}
+.atp-share-public .pw-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+.atp-share-public .pw-form label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--atp-text);
+}
+.atp-share-public .pw-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 13px;
+  background: var(--atp-page);
+  color: var(--atp-text);
+  border: 1px solid var(--atp-control);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: none;
+  letter-spacing: 0;
+}
+.atp-share-public .pw-input:focus {
+  border-color: var(--atp-primary);
+  outline: 2px solid var(--atp-primary);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+.atp-share-public .pw-input::placeholder {
+  color: var(--atp-muted);
+}
+.atp-share-public .alert-error {
+  font-size: 13px;
+  line-height: 1.65;
+  border: 1px solid #bf3b4660;
+  background: #bf3b4610;
+  color: var(--atp-text);
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+.atp-share-public .app-footer {
+  width: 100%;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  border-top: 1px solid var(--atp-line);
+  flex-direction: row;
+}
+.atp-share-public .footer-brand,
+.atp-share-public .footer-links a {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--atp-muted);
+  line-height: 1.5;
+}
+.atp-share-public a:focus-visible,
+.atp-share-public button:focus-visible {
+  outline: 2px solid var(--atp-primary);
+  outline-offset: 4px;
+}
+.atp-share-public .share-download-form {
+  margin: 0;
+}
+/* Sidecar modal: existing event handlers and IDs remain intact. */
+#atpShareOverlay {
+  --atps-bg: var(--atp-page, #f6f8fb);
+  --atps-surface: var(--atp-surface, #fff);
+  --atps-text: var(--atp-text, #222a35);
+  --atps-text-dim: var(--atp-muted, #5f6c7b);
+  --atps-text-muted: var(--atp-muted, #5f6c7b);
+  --atps-primary: var(--atp-primary, #0966be);
+  --atps-font-head: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --atps-font-body: var(--atps-font-head);
+  background: rgba(10, 18, 28, 0.48) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 20px !important;
+}
+#atpShareOverlay .atps-modal {
+  width: 560px;
+  max-width: 100%;
+  max-height: calc(100dvh - 40px);
+  margin: 0;
+  border: 1px solid var(--atp-line, #e4e9ef) !important;
+  border-radius: 14px !important;
+  background: var(--atp-surface, #fff) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 18px 60px #0003 !important;
+  font:
+    14px/1.6 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+#atpShareOverlay .atps-header {
+  padding: 24px 26px 18px !important;
+  border-bottom: 0 !important;
+  background: none !important;
+}
+#atpShareOverlay .atps-header h3 {
+  font:
+    650 21px/1.4 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif !important;
+  letter-spacing: -0.4px;
+  color: var(--atp-text) !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+#atpShareOverlay .atps-close {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--atp-page) !important;
+  color: var(--atp-muted) !important;
+  box-shadow: none;
+  transform: none;
+  font-size: 24px;
+}
+#atpShareOverlay .atps-tabs {
+  padding: 0 26px;
+  gap: 22px;
+  border-bottom: 1px solid var(--atp-line);
+  margin: 0;
+  background: none;
+}
+#atpShareOverlay .atps-tab {
+  padding: 12px 0 !important;
+  color: var(--atp-muted) !important;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  border-radius: 0;
+  background: none !important;
+  box-shadow: none;
+}
+#atpShareOverlay .atps-tab.active {
+  color: var(--atp-primary) !important;
+}
+#atpShareOverlay .atps-tab::after {
+  height: 2px;
+  background: var(--atp-primary) !important;
+  border-radius: 2px;
+}
+#atpShareOverlay .atps-body {
+  padding: 24px 26px !important;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+#atpShareOverlay #atpsTabCreate.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 18px;
+}
+#atpShareOverlay #atpsTabCreate > .atps-field {
+  margin: 0 !important;
+  min-inline-size: 0;
+}
+#atpShareOverlay #atpsTabCreate > .atps-field:nth-child(-n + 2),
+#atpShareOverlay #atpsBtnCreate,
+#atpShareOverlay #atpsResult {
+  grid-column: 1/-1;
+}
+#atpShareOverlay .atps-field > label {
+  display: block;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: var(--atp-text) !important;
+  margin: 0 0 9px;
+}
+#atpShareOverlay .atps-file-name {
+  font-size: 13px;
+  padding: 12px 14px;
+  border: 1px solid var(--atp-line) !important;
+  border-radius: 8px !important;
+  background: var(--atp-page) !important;
+  color: var(--atp-muted) !important;
+  box-shadow: none !important;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  font-family: inherit;
+}
+#atpShareOverlay .atps-radio-group {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+#atpShareOverlay .atps-radio {
+  margin: 0 !important;
+  min-width: 0;
+}
+#atpShareOverlay .atps-radio span {
+  padding: 9px 4px !important;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--atp-page) !important;
+  border: 1px solid var(--atp-line) !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--atp-muted) !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+#atpShareOverlay .atps-radio input:checked + span {
+  background: var(--atp-selected) !important;
+  color: var(--atp-primary) !important;
+  border-color: var(--atp-primary) !important;
+}
+#atpShareOverlay .atps-radio input:focus-visible + span {
+  outline: 2px solid var(--atp-primary);
+  outline-offset: 2px;
+}
+#atpShareOverlay .atps-input {
+  min-height: 42px;
+  padding: 10px 12px !important;
+  border: 1px solid var(--atp-control) !important;
+  border-radius: 8px !important;
+  background: var(--atp-surface) !important;
+  color: var(--atp-text) !important;
+  font:
+    14px/1.5 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+}
+#atpShareOverlay .atps-input:focus {
+  outline: 2px solid var(--atp-primary);
+  outline-offset: 2px;
+}
+#atpShareOverlay .atps-input::placeholder {
+  color: var(--atp-muted);
+}
+#atpShareOverlay .atps-btn-primary {
+  min-height: 44px;
+  padding: 11px 16px !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  background: var(--atp-primary) !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.hope-ui-dark #atpShareOverlay .atps-btn-primary {
+  color: #102337 !important;
+}
+#atpShareOverlay .atps-result {
+  margin: 0;
+  border: 1px solid var(--atp-line) !important;
+  background: var(--atp-page) !important;
+  border-radius: 8px;
+}
+#atpShareOverlay .atps-result-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--atp-text);
+}
+#atpShareOverlay .atps-result-url {
+  font-family: inherit;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  color: var(--atp-primary);
+}
+#atpShareOverlay .atps-share-item {
+  border: 1px solid var(--atp-line) !important;
+  background: var(--atp-surface) !important;
+  border-radius: 9px;
+  padding: 16px !important;
+  box-shadow: none !important;
+  transform: none !important;
+  margin-bottom: 10px;
+}
+#atpShareOverlay .atps-share-row {
+  gap: 14px;
+  align-items: flex-start;
+}
+#atpShareOverlay .atps-share-info {
+  min-width: 0;
+}
+#atpShareOverlay .atps-share-name {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  color: var(--atp-text);
+}
+#atpShareOverlay .atps-share-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+#atpShareOverlay .atps-share-meta > span[style] {
+  color: var(--atp-muted) !important;
+  font-size: 12px !important;
+}
+#atpShareOverlay .atps-share-path {
+  font-size: 12px;
+  color: var(--atp-muted);
+  overflow-wrap: anywhere;
+}
+#atpShareOverlay .atps-badge {
+  font-size: 11px !important;
+  padding: 3px 6px !important;
+  border-radius: 5px;
+  background: var(--atp-page);
+  color: var(--atp-muted);
+  border: 1px solid var(--atp-line);
+  box-shadow: none;
+}
+#atpShareOverlay .atps-badge-active {
+  color: var(--atp-primary);
+  background: var(--atp-selected);
+}
+#atpShareOverlay .atps-share-actions {
+  gap: 6px;
+  flex-shrink: 0;
+}
+#atpShareOverlay .atps-btn-sm {
+  min-width: 34px;
+  min-height: 34px;
+  padding: 6px 9px;
+  font-size: 12px;
+  border: 1px solid var(--atp-line) !important;
+  border-radius: 7px !important;
+  background: var(--atp-page) !important;
+  color: var(--atp-text) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+#atpShareOverlay .atps-btn-delete {
+  color: var(--atp-danger, #b12532) !important;
+}
+#atpShareOverlay button:focus-visible {
+  outline: 2px solid var(--atp-primary);
+  outline-offset: 3px;
+}
+#atpShareOverlay .atps-secret-row {
+  position: relative;
+}
+#atpShareOverlay .atps-secret-row > .atps-input {
+  padding-right: 42px !important;
+}
+#atpShareOverlay .atps-secret-toggle {
+  position: absolute;
+  inset: 4px 4px 4px auto;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  min-height: 34px;
+  border: 0;
+  border-radius: 5px;
+  color: var(--atp-muted);
+  background: var(--atp-surface);
+  cursor: pointer;
+}
+#atpShareOverlay .atps-secret-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+@media (max-width: 540px) {
+  .atp-share-public .app-header {
+    padding-inline: 20px;
+  }
+  .atp-share-public .app-header nav {
+    min-height: 64px;
+  }
+  .atp-share-public .app-logo {
+    gap: 12px;
+  }
+  .atp-share-public .app-logo img {
+    width: 80px;
+    height: 34px;
+  }
+  .atp-share-public .app-logo span {
+    padding-left: 12px;
+    font-size: 12px;
+  }
+  .atp-share-public .app-main {
+    padding: 32px 16px;
+  }
+  .atp-share-public .dl-card {
+    width: calc(100vw - 32px);
+    padding: 26px 22px;
+  }
+  .atp-share-public .file-name,
+  .atp-share-public .error-title {
+    font-size: 22px;
+  }
+  .atp-share-public .pw-input {
+    font-size: 16px;
+  }
+  .atp-share-public .app-footer {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px;
+  }
+  .atp-share-public .footer-brand,
+  .atp-share-public .footer-links a {
+    font-size: 12px;
+  }
+  #atpShareOverlay {
+    padding: 14px !important;
+  }
+  #atpShareOverlay .atps-modal {
+    max-height: calc(100dvh - 28px);
+  }
+  #atpShareOverlay .atps-header {
+    padding: 20px 20px 15px !important;
+  }
+  #atpShareOverlay .atps-header h3 {
+    font-size: 20px !important;
+  }
+  #atpShareOverlay .atps-tabs {
+    padding-inline: 20px;
+    gap: 20px;
+  }
+  #atpShareOverlay .atps-body {
+    padding: 20px !important;
+  }
+  #atpShareOverlay #atpsTabCreate.active {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  #atpShareOverlay .atps-radio-group {
+    gap: 6px;
+  }
+  #atpShareOverlay .atps-input {
+    font-size: 16px !important;
+  }
+  #atpShareOverlay .atps-share-item {
+    padding: 14px !important;
+  }
+  #atpShareOverlay .atps-share-actions {
+    flex-direction: column;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atp-share-public *,
+  #atpShareOverlay,
+  #atpShareOverlay * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (forced-colors: active) {
+  .atp-share-public input,
+  .atp-share-public button,
+  .atp-share-public a,
+  #atpShareOverlay .atps-input,
+  #atpShareOverlay .atps-radio input:checked + span {
+    border-color: ButtonText !important;
+  }
+  #atpShareOverlay .atps-radio input:checked + span {
+    outline: 2px solid Highlight;
+  }
+}
+
+#atpShareOverlay .atps-field-hint {
+  display: block;
+  font-size: 12px;
+  color: var(--atp-muted);
+  margin-top: 6px;
+  line-height: 1.6;
+}
+/* Reset the legacy centered flex card so every state follows the new left-aligned layout. */
+.atp-share-public .dl-card {
+  display: block !important;
+}
+.atp-share-public .file-name,
+.atp-share-public .error-title,
+.atp-share-public .error-desc {
+  text-align: left !important;
+}
+.atp-share-public .expiry-badge,
+.atp-share-public .expiry-badge span {
+  text-transform: none;
+  letter-spacing: 0;
+}
+.atp-share-public:not([data-theme="light"]) .app-logo img {
+  background: #fff;
+  border-radius: 5px;
+  padding: 3px;
+}
+#atpShareOverlay {
+  --atp-control: #7c8999;
+}
+.hope-ui-dark #atpShareOverlay {
+  --atp-control: #718297;
+}
+
+#atpShareOverlay .atps-tab:not(.active)::after {
+  background: transparent !important;
+}
+#atpShareOverlay .atps-tab.active::after {
+  inset-inline: 0;
+  background: var(--atp-primary) !important;
+}

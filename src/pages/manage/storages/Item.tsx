@@ -18,6 +18,7 @@ import { useT } from "~/hooks"
 import { DriverItem, Type } from "~/types"
 import { FolderChooseInput, SelectOptions } from "~/components"
 import { getFileSize } from "~/utils"
+import { MaskedInput } from "~/components/workspace/MaskedInput"
 
 export type ItemProps = DriverItem & {
   readonly?: boolean
@@ -137,6 +138,8 @@ const Item = (props: ItemProps) => {
 
   return (
     <FormControl
+      class={`atp-setting-field atp-field-${props.type}`}
+      data-driver-field={props.name}
       w="$full"
       display="flex"
       flexDirection="column"
@@ -162,7 +165,8 @@ const Item = (props: ItemProps) => {
           />
         </Match>
         <Match when={props.type === Type.String}>
-          <Input
+          <MaskedInput
+            secret={/password|secret|token|cookie|access_key/i.test(props.name)}
             id={props.name}
             type={props.name == "password" ? "password" : "text"}
             readOnly={props.readonly}

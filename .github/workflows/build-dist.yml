@@ -47,12 +47,14 @@ jobs:
           tar czf dist.tar.gz dist
           echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
 
-      - name: Publish release `custom-ui`
+      - name: Publish immutable UI release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release delete custom-ui --cleanup-tag -y --repo "$GITHUB_REPOSITORY" || true
-          gh release create custom-ui dist.tar.gz \
+          TAG="ui-${GITHUB_SHA:0:12}"
+          gh release create "$TAG" dist.tar.gz \
             --repo "$GITHUB_REPOSITORY" \
-            --title "custom-ui $sha_short" \
-            --notes "UI build từ commit $sha_short ($GITHUB_SHA). Core alist sẽ tải asset này qua releases/latest/download/dist.tar.gz."
+            --target "$GITHUB_SHA" \
+            --title "ATP workspace B · $sha_short" \
+            --notes "Immutable UI build from $GITHUB_SHA. Core remains independently versioned; dist.tar.gz also supports AList dist_dir." \
+            --latest

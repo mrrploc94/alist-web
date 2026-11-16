@@ -85,9 +85,19 @@ const PreviewSettings = () => {
   }
 
   return (
-    <VStack w="$full" alignItems="stretch" spacing="$4">
+    <VStack
+      class="atp-preview-settings"
+      w="$full"
+      alignItems="stretch"
+      spacing="$4"
+    >
       <Heading size="lg">{t("manage.sidemenu.preview-settings")}</Heading>
-      <HStack w="$full" spacing="$2" alignItems="center">
+      <HStack
+        class="atp-preview-tools"
+        w="$full"
+        spacing="$2"
+        alignItems="center"
+      >
         <ExtensionPicker
           value={ext()}
           onChange={setExt}
@@ -139,7 +149,7 @@ const PreviewSettings = () => {
           )}
         </For>
       </VStack>
-      <HStack spacing="$2">
+      <HStack class="atp-preview-tools" spacing="$2">
         <Button size="sm" onClick={openAdd}>
           {t("preview_settings.add_iframe")}
         </Button>

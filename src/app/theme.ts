@@ -15,7 +15,7 @@ const theme: HopeThemeConfig = {
         root: {
           rounded: "$lg",
           _active: {
-            transform: "scale(.95)",
+            transform: "none",
             transition: "0.2s",
           },
           _focus: {
@@ -25,15 +25,15 @@ const theme: HopeThemeConfig = {
       },
       defaultProps: {
         root: {
-          colorScheme: "info",
-          variant: "subtle",
+          colorScheme: "neutral",
+          variant: "outline",
         },
       },
     },
     IconButton: {
       defaultProps: {
-        colorScheme: "info",
-        variant: "subtle",
+        colorScheme: "neutral",
+        variant: "ghost",
       },
     },
     Input: {
@@ -48,7 +48,7 @@ const theme: HopeThemeConfig = {
       },
       defaultProps: {
         input: {
-          variant: "filled",
+          variant: "outline",
         },
       },
     },
@@ -63,7 +63,7 @@ const theme: HopeThemeConfig = {
         wordBreak: "break-all",
       },
       defaultProps: {
-        variant: "filled",
+        variant: "outline",
       },
     },
     Select: {
@@ -85,7 +85,7 @@ const theme: HopeThemeConfig = {
       },
       defaultProps: {
         root: {
-          variant: "filled",
+          variant: "outline",
         },
       },
     },

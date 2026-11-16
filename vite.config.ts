@@ -39,12 +39,16 @@ export default defineConfig({
   //   },
   // },
   server: {
-    host: "0.0.0.0",
+    host: "127.0.0.1",
     proxy: {
       "/api": {
-        target: "http://localhost:5244",
+        target: process.env.ALIST_DEV_API || "http://localhost:5244",
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+      "/share-app": {
+        target: process.env.ALIST_DEV_SIDECAR || "http://localhost:5244",
+        changeOrigin: true,
       },
     },
   },

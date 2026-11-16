@@ -7,6 +7,20 @@ import { useManageTitle } from "~/hooks"
 type Route = Pick<SideMenuItem, "to" | "component">
 
 const hide_routes: Route[] = [
+  { to: "/dashboard", component: lazy(() => import("./WorkspaceDashboard")) },
+  {
+    to: "/backup/overview",
+    component: lazy(() => import("./backup/BackupDashboard")),
+  },
+  {
+    to: "/backup/users",
+    component: lazy(() => import("./backup/BackupDashboard")),
+  },
+  {
+    to: "/backup/schedules",
+    component: lazy(() => import("./backup/BackupDashboard")),
+  },
+  { to: "/custom-shares", component: lazy(() => import("./CustomShares")) },
   {
     to: "/storages/add",
     component: lazy(() => import("./storages/AddOrEdit")),

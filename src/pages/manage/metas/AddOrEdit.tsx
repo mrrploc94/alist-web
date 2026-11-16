@@ -115,7 +115,7 @@ const AddOrEdit = () => {
   })
   return (
     <MaybeLoading loading={metaLoading()}>
-      <VStack w="$full" alignItems="start" spacing="$2">
+      <VStack class="atp-meta-form" w="$full" alignItems="start" spacing="$2">
         <Heading>{t(`global.${id ? "edit" : "add"}`)}</Heading>
         <FormControl w="$full" display="flex" flexDirection="column" required>
           <FormLabel for="path" display="flex" alignItems="center">

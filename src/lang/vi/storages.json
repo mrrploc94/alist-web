@@ -1,0 +1,49 @@
+{
+  "common": {
+    "mount_path": "Đường dẫn gắn",
+    "mount_path-tips": "The path you want to mount to, it is unique and cannot be repeated",
+    "driver": "Driver",
+    "order": "Thứ tự",
+    "order-tips": "Use to sort",
+    "status": "Trạng thái",
+    "remark": "Ghi chú",
+    "cache_expiration": "Cache thư mục (phút)",
+    "cache_expiration-tips": "The cache expiration time for this storage(minutes)",
+    "down_proxy_url": "URL download proxy",
+    "web_proxy": "Web proxy",
+    "webdav_policy": "Chính sách WebDAV",
+    "proxy_range": "Proxy Range",
+    "proxy_range-tips": "Need to enable proxy",
+    "webdav_policys": {
+      "302_redirect": "302 redirect",
+      "use_proxy_url": "use proxy URL",
+      "native_proxy": "native proxy"
+    },
+    "order_by": "Sắp xếp theo",
+    "order_bys": {
+      "name": "Name",
+      "size": "Size",
+      "modified": "Modified"
+    },
+    "order_direction": "Chiều sắp xếp",
+    "order_directions": {
+      "asc": "Ascending",
+      "desc": "Descending"
+    },
+    "extract_folder": "Ưu tiên thư mục",
+    "extract_folders": {
+      "front": "Extract to front",
+      "back": "Extract to back"
+    },
+    "enable_sign": "Bật chữ ký",
+    "disable_index": "Loại ổ khỏi chỉ mục",
+    "base_path": "Đường dẫn gốc"
+  },
+  "other": {
+    "start_load_success": "Start loading",
+    "load_all": "Tải lại tất cả",
+    "filter_by_driver": "Lọc theo driver",
+    "table_layout": "Dạng bảng"
+  },
+  "no_storage_content": "failed get storage: storage not found; please add a storage first"
+}

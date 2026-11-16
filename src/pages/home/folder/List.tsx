@@ -15,7 +15,7 @@ import {
 } from "~/store"
 import { OrderBy } from "~/store"
 import { UserMethods, UserPermissions } from "~/types"
-import { Col, cols, ListItem } from "./ListItem"
+import { Col, cols, ListItem, SelectionStats } from "./ListItem"
 import { ItemCheckbox, useSelectWithMouse } from "./helper"
 import { bus } from "~/utils"
 
@@ -123,6 +123,7 @@ const ListLayout = () => {
           return <ListItem obj={obj} index={i()} />
         }}
       </For>
+      <SelectionStats />
     </VStack>
   )
 }

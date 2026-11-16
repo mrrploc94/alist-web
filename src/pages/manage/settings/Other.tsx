@@ -317,6 +317,7 @@ const OtherSettings = () => {
       </Button>
       <Heading my="$2">{t("settings.token")}</Heading>
       <Input
+        type="password"
         value={token()}
         onInput={(e: any) => setToken(e.target.value as string)}
       />

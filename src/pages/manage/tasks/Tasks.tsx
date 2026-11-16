@@ -165,7 +165,7 @@ export const Tasks = (props: TasksProps) => {
       setRegexCompileFailed(true)
     }
   })
-  const [showOnlyMine, setShowOnlyMine] = createSignal(me().role !== 2)
+  const [showOnlyMine, setShowOnlyMine] = createSignal(!me().role.includes(2))
   const taskFilter = createMemo(() => {
     const regex = regexFilter()
     const mine = showOnlyMine()
@@ -341,7 +341,7 @@ export const Tasks = (props: TasksProps) => {
           onInput={(e: any) => setRegexFilterValue(e.target.value as string)}
           invalid={regexCompileFailed()}
         />
-        <Show when={me().role === 2}>
+        <Show when={me().role.includes(2)}>
           <Checkbox
             checked={showOnlyMine()}
             onChange={(e: any) => setShowOnlyMine(e.target.checked as boolean)}
@@ -351,6 +351,7 @@ export const Tasks = (props: TasksProps) => {
         </Show>
       </HStack>
       <VStack
+        class="atp-task-list"
         w={{ "@initial": "1024px", "@lg": "$full" }}
         overflowX="auto"
         shadow="$md"
@@ -358,7 +359,7 @@ export const Tasks = (props: TasksProps) => {
         spacing="$1"
         p="$1"
       >
-        <HStack class="title" w="$full" p="$2">
+        <HStack class="title atp-task-header" w="$full" p="$2">
           <HStack w={cols[0].w} spacing="$1">
             <Checkbox
               disabled={filteredTask().length === 0}
@@ -370,7 +371,7 @@ export const Tasks = (props: TasksProps) => {
               {t(`tasks.attr.${cols[0].name}`)}
             </Text>
           </HStack>
-          <Show when={me().role === 2}>
+          <Show when={me().role.includes(2)}>
             <Text
               w={cols[1].w}
               {...itemProps(cols[1])}

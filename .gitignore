@@ -2,5 +2,7 @@ node_modules
 dist
 /src/lang/*
 !/src/lang/en/
+!/src/lang/vi/
 .DS_Store
 .idea
+__pycache__/

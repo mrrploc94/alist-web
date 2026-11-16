@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="vi">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>Phương án B và giao diện live</title
+  ><style>
+    body {
+      font: 15px/1.6 system-ui;
+      margin: 0;
+      background: #f7f8fa;
+      color: #24282e;
+    }
+    main {
+      max-width: 1440px;
+      margin: auto;
+      padding: 32px;
+    }
+    h1 {
+      font-size: 26px;
+    }
+    section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-block: 32px;
+    }
+    figure {
+      margin: 0;
+      min-inline-size: 0;
+    }
+    img {
+      width: 100%;
+      border: 1px solid #ebedf0;
+      border-radius: 12px;
+    }
+    figcaption {
+      margin-block: 12px;
+    }
+    .mobile img {
+      max-width: 375px;
+      display: block;
+    }
+    a {
+      color: #0966be;
+    }
+    @media (max-width: 700px) {
+      main {
+        padding: 20px;
+      }
+      section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <main>
+    <h1>Phương án B đã chọn → giao diện live</h1>
+    <p>
+      Trái: bản mẫu minh họa đã chọn. Phải: ứng dụng thật dùng API và dữ liệu
+      hiện có. Không phải ảnh AList gốc trước sửa.
+      <a href="https://file.atpwebhost.com">Mở live</a>
+    </p>
+    <section>
+      <figure>
+        <figcaption>Bản mẫu B · 1280px</figcaption>
+        <img src="b-files-1280.png" alt="Bản mẫu File" />
+      </figure>
+      <figure>
+        <figcaption>File live · 1280px</figcaption>
+        <img src="production-files-1280.png" alt="File thật" />
+      </figure>
+    </section>
+    <section class="mobile">
+      <figure>
+        <figcaption>Bản mẫu B · 375px</figcaption>
+        <img src="b-files-375.png" alt="Bản mẫu điện thoại" />
+      </figure>
+      <figure>
+        <figcaption>File live · 375px</figcaption>
+        <img src="production-files-375.png" alt="File thật trên điện thoại" />
+      </figure>
+    </section>
+    <section>
+      <figure>
+        <figcaption>Quản trị live · 1280px</figcaption>
+        <img src="production-dashboard-1280.png" alt="Quản trị AList" />
+      </figure>
+      <figure class="mobile">
+        <figcaption>Quản trị live · 375px</figcaption>
+        <img src="production-dashboard-375.png" alt="Quản trị điện thoại" />
+      </figure>
+    </section>
+  </main>
+</html>

@@ -189,7 +189,10 @@ export const usePath = () => {
     const userPermissions = me().permissions || []
     if (path === "/") {
       // 如果有权限路径是"/"，直接获取文件列表
-      if (userPermissions.some((perm) => perm.path === "/")) {
+      if (
+        me().role.includes(2) ||
+        userPermissions.some((perm) => perm.path === "/")
+      ) {
         return handleFolder("/", index, size, undefined, force)
       }
       // 否则显示权限目录列表

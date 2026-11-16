@@ -24,7 +24,6 @@ export const Body = () => {
           files={["readme.md", "footer.md", "bottom.md"]}
           fromMeta="readme"
         />
-        <Sidebar />
       </VStack>
     </Container>
   )

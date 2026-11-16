@@ -1,3 +1,5 @@
+import { Link } from "@solidjs/router"
+import { joinBase } from "~/utils"
 import {
   Badge,
   Box,
@@ -179,6 +181,14 @@ const Shares = () => {
 
   return (
     <VStack spacing="$2" alignItems="start" w="$full">
+      <nav class="atp-share-types">
+        <Link class="active" href={joinBase("/@manage/shares")}>
+          {t("workspace.native_shares")}
+        </Link>
+        <Link href={joinBase("/@manage/custom-shares")}>
+          {t("workspace.custom_shares")}
+        </Link>
+      </nav>
       <HStack spacing="$2">
         <Button colorScheme="accent" loading={loading()} onClick={refresh}>
           {t("global.refresh")}

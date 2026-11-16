@@ -1,0 +1,12 @@
+{
+  "path": "Đường dẫn",
+  "password": "Mật khẩu thư mục",
+  "write": "Cho phép ghi",
+  "hide": "Quy tắc ẩn file",
+  "readme": "README",
+  "readme_help": "Markdown hoặc URL hiển thị cuối trang",
+  "header": "Header",
+  "header_help": "Markdown hoặc URL hiển thị đầu trang",
+  "apply_sub": "Áp dụng cho thư mục con",
+  "hide_help": "Mỗi biểu thức chính quy một dòng"
+}

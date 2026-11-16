@@ -7,21 +7,37 @@ import { Body } from "./Body"
 import { Footer } from "./Footer"
 import { Header } from "./header/Header"
 import { Toolbar } from "./toolbar/Toolbar"
+import {
+  ExplorerHeader,
+  ExplorerHeading,
+  ExplorerTree,
+} from "./WorkspaceExplorer"
+import { useT } from "~/hooks"
 
 const Index = () => {
+  const t = useT()
   useTitle(getSetting("site_title"))
   const announcement = getSetting("announcement")
   if (announcement) {
     notify.render(() => <Markdown children={announcement} />)
   }
   return (
-    <>
-      <Header />
+    <div class="atp-app atp-file-workspace">
+      <ExplorerHeader />
       <Toolbar />
-      <Body />
+      <div class="atp-file-body">
+        <aside class="atp-file-side">
+          <h2>{t("workspace.folders")}</h2>
+          <ExplorerTree />
+        </aside>
+        <main class="atp-file-main">
+          <ExplorerHeading />
+          <Body />
+        </main>
+      </div>
       <CreateShareDialog />
       <Footer />
-    </>
+    </div>
   )
 }
 

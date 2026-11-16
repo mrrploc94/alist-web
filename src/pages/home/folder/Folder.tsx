@@ -25,6 +25,7 @@ import "lightgallery/css/lightgallery-bundle.css"
 import { LightGallery } from "lightgallery/lightgallery"
 import { Search } from "./Search"
 import { Heading } from "@hope-ui/solid"
+import { FolderControls } from "./FolderControls"
 
 const ListLayout = lazy(() => import("./List"))
 const GridLayout = lazy(() => import("./Grid"))
@@ -72,6 +73,7 @@ const Folder = () => {
   const t = useT()
   return (
     <>
+      <FolderControls />
       <Switch>
         <Match when={layout() === "list"}>
           <ListLayout />
